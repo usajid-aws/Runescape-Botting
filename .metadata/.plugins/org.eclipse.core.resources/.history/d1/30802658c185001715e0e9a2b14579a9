@@ -1,0 +1,15 @@
+package scripts;
+
+import org.tribot.script.Script;
+import org.tribot.script.ScriptManifest;
+
+@ScriptManifest(authors = { "" }, category = "", name = "")
+public class SmeltCannon extends Script{
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

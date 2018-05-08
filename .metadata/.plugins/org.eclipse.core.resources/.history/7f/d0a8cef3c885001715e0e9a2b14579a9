@@ -1,0 +1,73 @@
+package scripts;
+
+import org.tribot.api2007.Inventory;
+import org.tribot.api2007.Objects;
+import org.tribot.api2007.Player;
+import org.tribot.api2007.types.RSObject;
+import org.tribot.script.Script;
+import org.tribot.script.ScriptManifest;
+
+@ScriptManifest(authors = { "racky567" }, category = "Smelting", name = "SmeltCannon")
+public class SmeltCannon extends Script{
+	
+	
+	private final int furnace = 24009; // furnace ID in Al-Kharid
+	Timer timer = new Timer(3000); // 3 second timer
+	private boolean onStart()
+	{
+		System.out.println("Script has started");
+		return true;
+	}
+
+	@Override
+	public void run() 
+	{
+		if(onStart())
+		{
+			while(true)
+			{
+				sleep(work());
+			}
+		}
+		
+	}
+	
+	private int work()
+	{
+		if(Inventory.isFull())
+		{
+			return 0; //placeholder will go to bank and exchange
+		}
+		else
+		{
+			if(Player.getRSPlayer().getAnimation() == -1)
+			{
+				RSObject[] furn = Objects.findNearest(10, furnace);
+				RSObject burner = furn[0];
+				if(furn!=null) // we found the furnace
+				{
+					burner.click("Smelt");	
+					timer.reset();
+				}
+				else
+				{
+					System.out.println("furnace not found");
+					return 0;
+				}
+					
+				
+			}
+		}
+		return 45;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

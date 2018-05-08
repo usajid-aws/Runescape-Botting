@@ -1,0 +1,278 @@
+package scripts;
+
+import java.awt.Point;
+
+import org.tribot.api.General;
+import org.tribot.api.Timing;
+import org.tribot.api.input.Mouse;
+import org.tribot.api2007.Banking;
+import org.tribot.api2007.Camera;
+import org.tribot.api2007.ChooseOption;
+import org.tribot.api2007.Constants;
+import org.tribot.api2007.Game;
+import org.tribot.api2007.GrandExchange;
+import org.tribot.api2007.GrandExchange.COLLECT_METHOD;
+import org.tribot.api2007.Inventory;
+import org.tribot.api2007.NPCChat;
+import org.tribot.api2007.NPCs;
+import org.tribot.api2007.Objects;
+import org.tribot.api2007.Player;
+import org.tribot.api2007.types.RSCharacter;
+import org.tribot.api2007.types.RSGEOffer.TYPE;
+import org.tribot.api2007.types.RSInterfaceChild;
+import org.tribot.api2007.types.RSInterfaceComponent;
+import org.tribot.api2007.types.RSItem;
+import org.tribot.api2007.types.RSNPC;
+import org.tribot.api2007.types.RSObject;
+import org.tribot.script.Script;
+import org.tribot.script.ScriptManifest;
+import org.tribot.api2007.Interfaces;
+
+
+@ScriptManifest(authors = { "usama" }, category = "Smithing", name = "SmeltCannon")
+public class SmeltCannon extends Script{
+	
+    Timer timer = new Timer(3000);
+	private final int furnace = 16469; // furnace ID in Al-Kharid
+	private final int steelBar = 2353;
+	private final int bank_booth = 6943;
+	private boolean onStart()
+	{
+		System.out.println("Script has started");
+		return true;
+	}
+
+	@Override
+	public void run() 
+	{
+		if(onStart())
+		{
+			while(true)
+			{
+				sleep(work());
+			}
+		}
+		
+	}
+	
+	private int work()
+	{
+		println("starting");
+		//runToGe();
+		geInteract();
+		RSItem[] bar = Inventory.find(steelBar);
+		if(bar==null || bar.length<=0)
+		{
+			runToBank();
+			//println("bar null ln 53");
+			return 0; //placeholder will go to bank and exchange
+		}
+		else
+		{ 
+			RSItem steel_Bar = bar[0];
+		    while(bar.length!=0)
+		    {
+		   
+			if(Player.getRSPlayer().getAnimation() == -1)
+			{
+			
+				RSObject[] furn = Objects.findNearest(10, furnace);
+				RSObject burner = furn[0];
+				steel_Bar.click("Use");
+				String uptext = Game.getUptext();
+				bar = Inventory.find(steelBar);
+				if (uptext != null && uptext.equalsIgnoreCase("Use Steel Bar ->"))
+				{
+					
+					burner.click("Use Steel Bar -> Furnace");
+					sleep(2000);
+					Mouse.clickBox(220, 390, 270, 440, 3);
+					sleep(2000);
+					Timing.waitChooseOption("Make all", 4000);
+					sleep(15000,15000);
+					bar = Inventory.find(steelBar);
+					if(bar.length == 0)
+					{
+						println("run to bank");
+						runToBank();
+						return 0;
+					}
+					else
+					{
+						println(bar.length);
+					}
+					steel_Bar= bar[bar.length-1];
+					bar = Inventory.find(steelBar);
+					if(Player.getRSPlayer().getAnimation()==-1 && bar.length>0)
+					{
+						sleep(1000);
+						continue;
+					}
+					else if(bar.length == 0)
+					{
+						runToBank();
+					}
+								
+				}
+				else
+				{
+					sleep(1000);
+				}
+			}
+				
+															
+			}
+				
+				
+		}
+		
+		return 45;
+		}
+
+	
+	private void runToBank() 
+	{
+		Camera.setCameraRotation(95);
+		Camera.setCameraAngle(67);
+		Point p = new Point(268, 35);
+		Mouse.click(p, 1);
+		sleep(5000);
+		Camera.setCameraRotation(120);
+		Camera.setCameraAngle(48);
+		p.setLocation(275, 25);
+		Mouse.click(p, 1);
+		sleep(3000);
+		BankInteract();
+		return;
+		
+	}
+
+	private void BankInteract()
+	{
+		RSObject[] booth = Objects.findNearest(10, bank_booth);
+		booth[0].click("Bank");
+		sleep(3000);
+		Banking.withdraw(0, "Steel bar");
+		sleep(1000);
+		if(Inventory.find(2).length > 0)
+		Banking.deposit(0, "Cannonball");
+		else
+		{
+			Banking.deposit(1, "Steel bar");
+			sleep(1000);
+			Banking.close();
+			returnToBase();
+			sleep(120000);
+			runToGe();
+			return;
+		}
+		Banking.close();
+		returnToBase();
+		return;
+	}
+
+	
+	/*
+	 * run back to furnace 
+	 */
+	
+	private void returnToBase()
+	{
+		Camera.setCameraRotation(294);
+		Camera.setCameraAngle(46);
+		Point p = new Point(231, 6);
+		Mouse.click(p, 1);
+		sleep(4000);
+		return;		
+		
+	}
+	
+	private void runToGe()
+	{
+		Camera.setCameraRotation(330);
+		Camera.setCameraAngle(43);
+		Point p = new Point(648,21);
+		Mouse.click(p, 1);
+		sleep(10000);
+		Camera.setCameraRotation(284);
+		Camera.setCameraAngle(43);
+		p = new Point(644,20);
+		Mouse.click(p, 1);
+		sleep(10000);
+		Camera.setCameraRotation(247);
+		Camera.setCameraAngle(55);
+		p = new Point(644,20);
+		Mouse.click(p, 1);
+		sleep(10000);
+		Camera.setCameraRotation(185);
+		Camera.setCameraAngle(33);
+		p = new Point(643,20);
+		Mouse.click(p, 1);
+		sleep(10000);
+		Camera.setCameraRotation(249);
+		Camera.setCameraAngle(33);
+		p = new Point(645,22);
+		Mouse.click(p, 1);
+		sleep(60000);
+		Camera.setCameraRotation(263);
+		Camera.setCameraAngle(33);
+		p = new Point(294,58);
+		Mouse.click(p, 1);
+		sleep(10000);
+		geInteract();
+				
+	}
+
+	private void geInteract() 
+	{
+		RSNPC[] banker_List = NPCs.findNearest(10, 6528);
+		println("bankerlist size: "+banker_List.length);
+		RSNPC banker = banker_List[0];
+		RSNPC[] geClerk = NPCs.findNearest(10, 2151);
+		println("ClerList size: "+geClerk.length);
+		RSNPC clerk = geClerk[0];
+		/*banker.click("Talk-to");
+		sleep(1000);
+		NPCChat.clickContinue(true);
+		sleep(1000);
+		NPCChat.selectOption("I'd like to access my bank account, please.", true);
+		NPCChat.clickContinue(active);
+		sleep(2000);
+		RSItem[] cannonBalls = Banking.find("Cannonball");		
+		Banking.withdraw(0, "Cannonball");
+		Banking.close();
+		sleep(2000);*/
+		clerk.click("Exchange");
+		sleep(3000);
+		NPCChat.clickContinue(true);
+		sleep(3000);		
+		NPCChat.selectOption("I'd like to set up trade offers please.", true);
+		sleep(1000);
+		NPCChat.clickContinue(false);
+		int inStock = Inventory.getCount("Cannonball"); 
+		GrandExchange buyer = new GrandExchange();
+		//buyer.offer("Cannonball", -1, inStock, true);
+        //Could be null - Nothing I can do atm tho takes a lot of code to fix, will do in future
+        General.sleep(200, 2800);
+		sleep(30000);
+		println("ended 250");
+		RSNPC[] geClerk = NPCs.findNearest(100, 2151);
+		RSNPC clerk = geClerk[0];
+		clerk.click("Exchange");
+		sleep(3000);
+		NPCChat.clickContinue(true);
+		sleep(3000);		
+		NPCChat.selectOption("I'd like to set up trade offers please.", true);
+		sleep(1000);
+		NPCChat.clickContinue(false);
+		//GrandExchange buyer = new GrandExchange();
+	    RSItem[] coins = Inventory.find("Coins");
+		GrandExchange.collectItems(GrandExchange.COLLECT_METHOD.ITEMS, coins[0]); // should be coins
+		
+		
+		
+				
+	}
+
+}
+

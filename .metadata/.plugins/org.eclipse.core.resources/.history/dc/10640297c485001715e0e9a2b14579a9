@@ -1,0 +1,34 @@
+package scripts;
+
+import org.tribot.script.Script;
+import org.tribot.script.ScriptManifest;
+
+@ScriptManifest(authors = { "racky567" }, category = "Smelting", name = "SmeltCannon")
+public class SmeltCannon extends Script{
+	
+	
+	private boolean onStart()
+	{
+		System.out.println("Script has started");
+		return true;
+	}
+
+	@Override
+	public void run() 
+	{
+		if(onStart())
+		{
+			while(true)
+			{
+				sleep(work());
+			}
+		}
+		
+	}
+	
+	private int work()
+	{
+		return 45;
+	}
+
+}

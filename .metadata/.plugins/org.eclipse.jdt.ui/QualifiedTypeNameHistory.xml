@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.tribot.script.ScriptManifest"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.Game"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.ChooseOption"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.types.RSObject"/>
+<fullyQualifiedTypeName name="org.tribot.api.input.Mouse"/>
+<fullyQualifiedTypeName name="org.tribot.api.Timing"/>
+<fullyQualifiedTypeName name="org.tribot.api.General"/>
+<fullyQualifiedTypeName name="scripts.Timer"/>
+<fullyQualifiedTypeName name="java.awt.Point"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.Banking"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.Equipment"/>
+<fullyQualifiedTypeName name="org.tribot.api.Clicking"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.WebWalking"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.Options"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.types.RSTile"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.Walking"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.GameTab"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.GameTab.TABS"/>
+<fullyQualifiedTypeName name="org.tribot.script.Script"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.Interfaces"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.Login.STATE"/>
+<fullyQualifiedTypeName name="scripts.TradeMule"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.Players"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.WorldHopper"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.Trading"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.Login"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="java.text.ParseException"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.types.RSInterfaceChild"/>
+<fullyQualifiedTypeName name="org.tribot.api.types.generic.Condition"/>
+<fullyQualifiedTypeName name="org.tribot.api2007.Camera"/>
+<fullyQualifiedTypeName name="org.tribot.script.interfaces.Painting"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+</qualifiedTypeNameHistroy>
