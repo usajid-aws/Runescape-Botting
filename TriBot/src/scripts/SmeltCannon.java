@@ -91,7 +91,7 @@ public class SmeltCannon extends Script implements Painting {
 						setLoginBotState(false);
 						sleep(1200000);
 						setLoginBotState(true);
-						Login.login("4@rsgold.party", "partyrs007");
+						Login.login("username", "password");
 						timer.reset();
 						return 45;
 					}
